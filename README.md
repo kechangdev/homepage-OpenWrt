@@ -4,7 +4,7 @@
 访问你的 OpenWrt IP/home.html 即可！
 
 # Config
-在 `home.html` 中服务列表添加你的服务即可：
+在 `home.html` 中服务列表添加你的服务：
 ```
         // 定义服务列表
         const services = [
