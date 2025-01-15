@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenWrt</title>
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Apple 专有 Meta 标签 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="OpenWrt">
+    <meta name="theme-color" content="#4A90E2">
+
+    <!-- Apple Touch 图标 -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+
+    <style>
+        /* CSS 变量 */
+        :root {
+            --primary-color: #4A90E2;
+            --primary-hover: #357ABD;
+            --background-gradient: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            --card-background: #ffffff;
+            --card-hover-background: #f0f8ff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --font-primary: 'Montserrat', 'Roboto', sans-serif;
+            --font-secondary: 'Roboto', sans-serif;
+        }
+
+        /* 基础样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--background-gradient);
+            font-family: var(--font-primary);
+            color: #333;
+            overflow-x: hidden;
+            
+            /* 禁止用户选取字符 */
+            user-select: none;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            margin: 20px auto;
+            padding: 30px 25px;
+            background: var(--card-background);
+            border-radius: 16px;
+            box-shadow: 0 8px 16px var(--shadow);
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+            
+            /* 禁止用户选取字符 */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-family: var(--font-primary);
+            font-size: 2.5em;
+            animation: slideDown 1s ease-out;
+            
+            /* 禁止用户选取字符 */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .ip-section {
+            margin-bottom: 30px;
+            font-size: 1.3em;
+            font-weight: 500;
+            animation: fadeInUp 1s ease-out;
+            
+            /* 禁止用户选取字符 */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            
+            /* 禁止用户选取字符 */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .service-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            background: var(--card-background);
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            
+            /* 禁止用户选取字符 */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* 动态延迟 */
+        .service-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+        .service-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+        .service-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        .service-card:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+        .service-card:hover {
+            background: var(--card-hover-background);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            transform: scale(1.05);
+        }
+        .service-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            
+            /* 禁止用户选取字符 */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* 动画关键帧 */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 600px) {
+            .service-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .ip-section {
+                font-size: 1.1em;
+            }
+        }
+
+        /* 页脚样式 */
+        footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #777;
+            
+            /* 禁止用户选取字符 */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* 移除独立模式下的滚动条（可选） */
+        @media (display-mode: standalone) {
+            body {
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>OpenWrt</h1>
+        
+        <div class="ip-section">
+            <h2>Current IP: <span id="current-ip">Loading...</span></h2>
+        </div>
+        
+        <div class="services" id="services-container">
+            <!-- 服务卡片将由JavaScript动态生成 -->
+        </div>
+
+        <footer>
+            © 2025 KECHANG ALL RIGHTS RESERVED
+        </footer>
+    </div>
+
+    <script>
+        // 禁止右键菜单
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+        });
+
+        // 获取当前IP地址（假设访问者使用路由器的IP访问此页面）
+        const hostname = window.location.hostname;
+        document.getElementById('current-ip').textContent = hostname;
+
+        // 定义服务列表
+        const services = [
+            { 
+                name: 'OpenWrt', 
+                port: 80,
+                path: ''
+            },
+            { 
+                name: 'Qinglong', 
+                port: 5700,
+                path: ''
+            },
+            { 
+                name: 'Clash', 
+                port: 9090,
+                path: '/ui/yacd/#/'
+            },
+            {
+                name: 'Alist',
+                port: 5244,
+                path: ''
+            }
+            // 在这里添加或删除服务项
+        ];
+
+        const servicesContainer = document.getElementById('services-container');
+
+        services.forEach((service, index) => {
+            // 创建服务卡片元素
+            const card = document.createElement('a'); // 将卡片转换为链接
+            card.classList.add('service-card');
+            
+            // 创建服务名称元素
+            const serviceName = document.createElement('div');
+            serviceName.classList.add('service-name');
+            serviceName.textContent = service.name; // 只显示名称
+            
+            // 构建链接地址
+            let linkHref = `http://${hostname}:${service.port}`;
+            if (service.path) {
+                // 确保路径以斜杠开头
+                linkHref += service.path.startsWith('/') ? service.path : `/${service.path}`;
+            }
+            card.href = linkHref;
+            
+            // 将名称添加到卡片中
+            card.appendChild(serviceName);
+            
+            // 设置动画延迟
+            card.style.animationDelay = `${0.2 + index * 0.2}s`;
+            
+            // 将卡片添加到容器中
+            servicesContainer.appendChild(card);
+        });
+    </script>
+
+</body>
+</html>
