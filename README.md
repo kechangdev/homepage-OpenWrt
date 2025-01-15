@@ -8,7 +8,7 @@ Then, access your OpenWrt IP at `/home.html` to get started!
 
 Add your services to the service list in `home.html`:
 
-``` javascrapt
+``` javascript
 // Define the service list
 const services = [
     { 
