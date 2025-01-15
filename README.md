@@ -3,6 +3,35 @@
 
 访问你的 OpenWrt IP/home.html 即可！
 
+# Config
+在 `home.html` 中服务列表添加你的服务即可：
+```
+        // 定义服务列表
+        const services = [
+            { 
+                name: 'OpenWrt', 
+                port: 80,
+                path: ''
+            },
+            { 
+                name: 'Qinglong', 
+                port: 5700,
+                path: ''
+            },
+            { 
+                name: 'Clash', 
+                port: 9090,
+                path: '/ui/yacd/#/'
+            },
+            {
+                name: 'Alist',
+                port: 5244,
+                path: ''
+            }
+            // 在这里添加或删除服务项
+        ];
+```
+
 # Preview
 ![image](https://github.com/user-attachments/assets/1b2298f0-f80a-41f9-af6c-7f7d0647480b)
 
